@@ -37,7 +37,7 @@ class sale_order(osv.osv):
 
     def _get_date_planned(self, cr, uid, order, line, start_date, context=None):
         # Overwrite with this date
-        return order.date_expected
+        return self.date_to_datetime(cr, uid, order.date_expected, context=context)
 
 sale_order()
 
