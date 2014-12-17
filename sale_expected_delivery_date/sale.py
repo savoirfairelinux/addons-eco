@@ -20,8 +20,6 @@
 ##############################################################################
 
 from openerp.osv import fields, osv
-import time
-import datetime
 
 
 class sale_order(osv.osv):
@@ -29,15 +27,19 @@ class sale_order(osv.osv):
     _inherit = "sale.order"
 
     _columns = {
-        'date_expected': fields.date('Expected Delivery Date', required=True, readonly=True, states={'draft': [('readonly', False)]}),
+        'date_expected': fields.date('Expected Delivery Date', required=True,
+                                     readonly=True,
+                                     states={'draft': [('readonly', False)]}),
     }
     _defaults = {
-        'date_expected': lambda *a: datetime.datetime.now().strftime('%Y-%m-%d'),
+        'date_expected': fields.date.today,
     }
 
-    def _get_date_planned(self, cr, uid, order, line, start_date, context=None):
+    def _get_date_planned(self, cr, uid, order, line, start_date,
+                          context=None):
         # Overwrite with this date
-        return self.date_to_datetime(cr, uid, order.date_expected, context=context)
+        return self.date_to_datetime(cr, uid, order.date_expected,
+                                     context=context)
 
 sale_order()
 

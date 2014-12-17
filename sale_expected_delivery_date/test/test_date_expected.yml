@@ -1,0 +1,22 @@
+-
+  In order to test process of the Sale Order, I create sale order
+-
+  !record {model: sale.order, id: sale_order_test1}:
+    partner_id: base.res_partner_2
+    note: Invoice after delivery
+    payment_term: account.account_payment_term
+    order_line:
+      - product_id: product.product_product_7
+        product_uom_qty: 8
+        th_weight: 5.0
+    date_expected: 2014-12-25
+-
+  I confirm the sale order
+-
+  !workflow {model: sale.order, ref: sale_order_test1, action: order_confirm}
+-
+  I verify that there was a DO created, and it had the right scheduled date
+-
+  !assert {model: sale.order, id: sale_order_test1, string: The DO was not created with the right scheduled time}:
+    - picking_ids[0].min_date[:10] == '2014-12-25'
+

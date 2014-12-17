@@ -20,22 +20,29 @@
 ##############################################################################
 {
     'name': "Sale's Expected Delivery Date",
-    'version' : '0.1',
-    'author' : 'Ecosoft',
+    'version': '0.1',
+    'author': 'Ecosoft',
     'summary': "Force using SO's Expected Deivery Date in DO",
     'description': """
 This module provides "Expected Delivery Date" in Sales Order.
-This date will be used for DO's Scheduled Time instead of standard use of Product's customer lead time (will be ignored).    
-    """,
+This date will be used for DO's Scheduled Time instead of standard use of
+Product's customer lead time (will be ignored).
+""",
     'category': 'Sales Management',
-    'website' : 'http://ecosoft.co.th',
-    'images' : [],
-    'depends' : ['sale', 'sale_stock'],
-    'demo' : [],
-    'data' : [
-              'sale_view.xml',
-              ],
-    'test' : [],
+    'website': 'http://ecosoft.co.th',
+    'images': [],
+    'depends': [
+        'delivery',
+        'sale',
+        'sale_stock',
+    ],
+    'demo': [],
+    'data': [
+        'sale_view.xml',
+    ],
+    'test': [
+        'test/test_date_expected.yml',
+    ],
     'auto_install': False,
     'application': True,
     'installable': True,
